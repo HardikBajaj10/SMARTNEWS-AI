@@ -1,4 +1,8 @@
 
+// display current user if available
+const emailEl = document.getElementById("userEmail");
+if(emailEl) emailEl.innerText = localStorage.getItem("loggedUser") || "";
+
 // Simulated Interaction Data
 
 const user = {

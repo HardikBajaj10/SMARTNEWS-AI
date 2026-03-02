@@ -1,13 +1,13 @@
 
-// CATEGORY COUNT (Aggregation Simulation)
+// show logged in email
+const emailEl = document.getElementById("userEmail");
+if(emailEl) emailEl.innerText = localStorage.getItem("loggedUser") || "";
 
+// CATEGORY COUNT (Aggregation from real articles)
 const categoryCount = {};
-
 articles.forEach(article => {
-
-categoryCount[article.category] =
-(categoryCount[article.category] || 0) + 1;
-
+    categoryCount[article.category] =
+        (categoryCount[article.category] || 0) + 1;
 });
 
 
@@ -47,36 +47,19 @@ backgroundColor:"#3b82f6"
 const ratings = articles.map(a=>a.rating);
 
 const avgRating =
-ratings.reduce((a,b)=>a+b,0)/ratings.length;
-
-
+    ratings.reduce((a,b)=>a+b,0)/ratings.length;
+const remaining = Math.max(0, 5 - avgRating);
 
 new Chart(
-
-document.getElementById("ratingChart"),
-
-{
-
-type:"pie",
-
-data:{
-
-labels:["Average Rating","Remaining"],
-
-datasets:[{
-
-data:[avgRating,5-avgRating],
-
-backgroundColor:[
-
-"#22c55e",
-
-"#374151"
-
-]
-
-}]
-
-}
-
-});
+    document.getElementById("ratingChart"),
+    {
+        type:"pie",
+        data:{
+            labels:["Average Rating","Remaining"],
+            datasets:[{
+                data:[avgRating, remaining],
+                backgroundColor:["#22c55e","#374151"]
+            }]
+        }
+    }
+);
