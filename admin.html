@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Admin Panel</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-900 text-white flex">
+
+<!-- Sidebar -->
+
+<div class="w-64 bg-gray-800 min-h-screen p-6">
+
+<h2 class="text-xl font-bold text-blue-400 mb-8">
+
+SmartNews Admin
+
+</h2>
+
+<a href="dashboard.html" class="block mb-4">
+Dashboard
+</a>
+
+<a href="admin.html" class="block mb-4 text-blue-400">
+Manage Articles
+</a>
+
+<a href="analytics.html">
+Analytics
+</a>
+
+</div>
+
+
+<!-- Main -->
+
+<div class="flex-1 p-10">
+
+<h1 class="text-3xl mb-6">
+
+Manage Articles
+
+</h1>
+
+<!-- Add Article Form -->
+
+<div class="bg-gray-800 p-6 rounded-lg mb-8">
+
+<h2 class="mb-4 text-xl">
+
+Add New Article
+
+</h2>
+
+<input id="title"
+placeholder="Title"
+class="p-2 w-full mb-3 bg-gray-700 rounded">
+
+<input id="category"
+placeholder="Category"
+class="p-2 w-full mb-3 bg-gray-700 rounded">
+
+<input id="author"
+placeholder="Author"
+class="p-2 w-full mb-3 bg-gray-700 rounded">
+
+<button onclick="addArticle()"
+class="bg-blue-500 p-2 rounded">
+
+Add Article
+
+</button>
+
+</div>
+
+
+<!-- Article List -->
+
+<div id="articleList"
+class="grid grid-cols-3 gap-6">
+
+</div>
+
+</div>
+
+<script src="data/mockData.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+
+</html>
