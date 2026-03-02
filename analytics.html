@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Analytics</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="bg-gray-900 text-white flex">
+
+<!-- Sidebar -->
+
+<div class="w-64 bg-gray-800 min-h-screen p-6">
+
+<h2 class="text-xl font-bold text-blue-400 mb-8">
+
+SmartNews
+
+</h2>
+
+<a href="dashboard.html" class="block mb-4">
+
+Dashboard
+
+</a>
+
+<a href="admin.html" class="block mb-4">
+
+Manage Articles
+
+</a>
+
+<a href="analytics.html" class="text-blue-400">
+
+Analytics
+
+</a>
+
+</div>
+
+
+<!-- Main -->
+
+<div class="flex-1 p-10">
+
+<h1 class="text-3xl font-semibold tracking-wide mb-6">
+    ANALYTICS DASHBOARD
+</h1>
+
+
+<div class="grid grid-cols-2 gap-10">
+
+<div class="bg-gray-800 p-6 rounded">
+
+<h2 class="mb-4">
+
+Articles Per Category
+
+</h2>
+
+<canvas id="categoryChart"></canvas>
+
+</div>
+
+
+<div class="bg-gray-800 p-6 rounded">
+
+<h2 class="mb-4">
+
+Average Rating
+
+</h2>
+
+<canvas id="ratingChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="data/mockData.js"></script>
+
+<script src="js/analytics.js"></script>
+
+</body>
+
+</html>

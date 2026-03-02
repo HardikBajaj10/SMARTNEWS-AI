@@ -11,38 +11,116 @@
 <body class="bg-gray-900 text-white flex">
 
 <!-- Sidebar -->
+<div class="w-64 bg-gray-800 min-h-screen p-6 flex flex-col">
 
-<div class="w-64 bg-gray-800 min-h-screen p-6">
-
-<h2 class="text-xl font-bold mb-8 text-blue-400">
-
+<h2 class="text-xl font-bold text-blue-400 mb-10">
 SmartNews
-
 </h2>
 
-<a href="dashboard.html" class="block mb-4">
+<nav class="flex flex-col space-y-4">
+
+<a href="dashboard.html" class="hover:text-blue-400">
 Dashboard
 </a>
 
-<a href="admin.html" class="block mb-4">
+<a href="admin.html" class="hover:text-blue-400">
 Manage Articles
 </a>
 
-<a href="analytics.html" class="block">
+<a href="analytics.html" class="hover:text-blue-400">
 Analytics
 </a>
+
+<a href="profile.html" class="hover:text-blue-400">
+Profile
+</a>
+
+</nav>
 
 </div>
 
 <!-- Main -->
 
 <div class="flex-1 p-10">
+    <div class="flex justify-between items-center mb-8">
+
+<h1 class="text-3xl font-semibold">
+Recommended Articles
+</h1>
+
+<button onclick="logout()"
+class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">
+Logout
+</button>
+
+</div>
+<div class="grid grid-cols-3 gap-6 mb-8">
+
+<div class="bg-gray-800 p-6 rounded text-center">
+<h2 class="text-xl">Total Articles</h2>
+<p class="text-2xl font-bold text-blue-400">
+<span id="totalArticles"></span>
+</p>
+</div>
+
+<div class="bg-gray-800 p-6 rounded text-center">
+<h2 class="text-xl">Top Category</h2>
+<p class="text-2xl font-bold text-green-400">
+Technology
+</p>
+</div>
+
+<div class="bg-gray-800 p-6 rounded text-center">
+<h2 class="text-xl">Top Rated</h2>
+<p class="text-2xl font-bold text-yellow-400">
+4.8 ⭐
+</p>
+</div>
+
+</div>
 
 <h1 class="text-3xl mb-6">
 
 Recommended Articles
 
 </h1>
+<div class="flex gap-4 mb-6">
+
+<input id="searchInput"
+placeholder="Search articles..."
+class="p-3 bg-gray-800 rounded w-1/2">
+
+
+<select id="categoryFilter"
+class="p-3 bg-gray-800 rounded">
+
+<option value="All">
+
+All Categories
+
+</option>
+
+<option value="Technology">
+
+Technology
+
+</option>
+
+<option value="Sports">
+
+Sports
+
+</option>
+
+<option value="Business">
+
+Business
+
+</option>
+
+</select>
+
+</div>
 
 <div id="articles"
 class="grid grid-cols-3 gap-6">
@@ -54,6 +132,11 @@ class="grid grid-cols-3 gap-6">
 
 
 <script src="js/dashboard.js"></script>
+<script>
+function logout(){
+    window.location.href="index.html";
+}
+</script>
 
 </body>
 </html>
