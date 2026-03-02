@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body class="bg-gray-900 text-white flex">
@@ -13,13 +12,14 @@
 <!-- Sidebar -->
 <div class="w-64 bg-gray-800 min-h-screen p-6 flex flex-col">
 
-<h2 class="text-xl font-bold text-blue-400 mb-10">
+<h2 class="text-2xl font-bold text-blue-400 mb-10">
 SmartNews
 </h2>
+<p class="text-gray-400 mb-6">Welcome, <span id="userEmail"></span></p>
 
-<nav class="flex flex-col space-y-4">
+<nav class="flex flex-col space-y-6 text-gray-300 flex-grow">
 
-<a href="dashboard.html" class="hover:text-blue-400">
+<a href="dashboard.html" class="text-blue-400 font-semibold">
 Dashboard
 </a>
 
@@ -37,103 +37,57 @@ Profile
 
 </nav>
 
-</div>
-
-<!-- Main -->
-
-<div class="flex-1 p-10">
-    <div class="flex justify-between items-center mb-8">
-
-<h1 class="text-3xl font-semibold">
-Recommended Articles
-</h1>
-
 <button onclick="logout()"
-class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">
+class="bg-red-500 hover:bg-red-600 p-3 rounded-lg">
+
 Logout
+
 </button>
 
 </div>
-<div class="grid grid-cols-3 gap-6 mb-8">
 
-<div class="bg-gray-800 p-6 rounded text-center">
-<h2 class="text-xl">Total Articles</h2>
-<p class="text-2xl font-bold text-blue-400">
-<span id="totalArticles"></span>
-</p>
-</div>
 
-<div class="bg-gray-800 p-6 rounded text-center">
-<h2 class="text-xl">Top Category</h2>
-<p class="text-2xl font-bold text-green-400">
-Technology
-</p>
-</div>
+<!-- Main Content -->
+<div class="flex-1 p-12">
 
-<div class="bg-gray-800 p-6 rounded text-center">
-<h2 class="text-xl">Top Rated</h2>
-<p class="text-2xl font-bold text-yellow-400">
-4.8 ⭐
-</p>
-</div>
-
-</div>
-
-<h1 class="text-3xl mb-6">
-
-Recommended Articles
-
+<h1 class="text-4xl font-semibold mb-10">
+Welcome to Your Personalized Feed
 </h1>
-<div class="flex gap-4 mb-6">
 
-<input id="searchInput"
-placeholder="Search articles..."
-class="p-3 bg-gray-800 rounded w-1/2">
+<h2 class="text-blue-400 text-2xl mb-6 font-semibold">
+Today's Headlines
+</h2>
 
-
-<select id="categoryFilter"
-class="p-3 bg-gray-800 rounded">
-
-<option value="All">
-
-All Categories
-
-</option>
-
-<option value="Technology">
-
-Technology
-
-</option>
-
-<option value="Sports">
-
-Sports
-
-</option>
-
-<option value="Business">
-
-Business
-
-</option>
-
-</select>
-
+<div id="todaySection"
+class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-14">
 </div>
 
-<div id="articles"
-class="grid grid-cols-3 gap-6">
 
+<h2 class="text-green-400 text-2xl mb-6 font-semibold">
+Recommended For You ⭐
+</h2>
+
+<div id="recommendedSection"
+class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 </div>
 
 </div>
-<script src="data/mockData.js"></script>
 
 
+<script>
+// authentication guard
+if(!localStorage.getItem("loggedUser")){
+    window.location.href = "index.html";
+}
+</script>
+<script src="data/articles.js"></script>
 <script src="js/dashboard.js"></script>
+
 <script>
 function logout(){
+    // remove only login info, keep preferences and activity for next login
+    localStorage.removeItem("loggedUser");
+    localStorage.removeItem("role");
     window.location.href="index.html";
 }
 </script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartNews – Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900">
+  <div class="glass-card p-8 w-full max-w-md fade-in">
+    <h1 class="text-3xl font-bold text-blue-400 text-center mb-6">Create Account</h1>
+    <form id="registerForm" class="space-y-5">
+      <input id="email" type="email" placeholder="Email"
+             class="w-full p-3 bg-gray-800 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      <input id="password" type="password" placeholder="Password"
+             class="w-full p-3 bg-gray-800 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      <select id="role" class="w-full p-3 bg-gray-800 rounded text-white">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="submit" class="btn-primary w-full">Register</button>
+    </form>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const pw = document.getElementById('password').value;
+      const role = document.getElementById('role').value;
+      if (!email || !pw) { alert('Please fill all fields'); return; }
+      const user = { email, role, pw };
+      // In a real app this would be sent to the server. For now we store locally.
+      localStorage.setItem('registeredUser', JSON.stringify(user));
+      alert('Registered! You can now log in.');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

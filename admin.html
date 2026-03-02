@@ -1,99 +1,137 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body class="bg-gray-900 text-white flex">
 
 <!-- Sidebar -->
 
-<div class="w-64 bg-gray-800 min-h-screen p-6">
+<div class="w-64 bg-gray-800 min-h-screen p-6 flex flex-col">
 
-<h2 class="text-xl font-bold text-blue-400 mb-8">
-
-SmartNews Admin
-
+<h2 class="text-2xl font-bold text-blue-400 mb-10">
+SmartNews
 </h2>
+<p class="text-gray-400 mb-6">You are logged in as <span id="userEmail"></span></p>
 
-<a href="dashboard.html" class="block mb-4">
+<nav class="flex flex-col space-y-6 flex-grow text-gray-300">
+
+<a href="dashboard.html" class="hover:text-blue-400">
 Dashboard
 </a>
 
-<a href="admin.html" class="block mb-4 text-blue-400">
+<a href="admin.html" class="text-blue-400 font-semibold">
 Manage Articles
 </a>
 
-
-<a href="analytics.html">
+<a href="analytics.html" class="hover:text-blue-400">
 Analytics
 </a>
 
-<a href="profile.html">
+<a href="profile.html" class="hover:text-blue-400">
 Profile
 </a>
 
+</nav>
 
-</div>
-
-
-<!-- Main -->
-
-<div class="flex-1 p-10">
-
-<h1 class="text-3xl font-semibold tracking-wide mb-6">
-    MANAGE ARTICLES
-</h1>
-
-<!-- Add Article Form -->
-
-<div class="bg-gray-800 p-6 rounded-lg mb-8">
-
-<h2 class="mb-4 text-xl">
-
-Add New Article
-
-</h2>
-
-<input id="title"
-placeholder="Title"
-class="p-2 w-full mb-3 bg-gray-700 rounded">
-
-<input id="category"
-placeholder="Category"
-class="p-2 w-full mb-3 bg-gray-700 rounded">
-
-<input id="author"
-placeholder="Author"
-class="p-2 w-full mb-3 bg-gray-700 rounded">
-
-<button onclick="addArticle()"
-class="bg-blue-500 p-2 rounded">
-
-Add Article
-
+<button onclick="logout()"
+class="bg-red-500 hover:bg-red-600 p-3 rounded-lg mt-6">
+Logout
 </button>
 
 </div>
 
 
-<!-- Article List -->
+<!-- Main Content -->
+
+<div class="flex-1 p-12">
+
+<h1 class="text-4xl font-semibold mb-8 tracking-wide">
+Manage Articles
+</h1>
+
+
+<div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700 max-w-3xl">
+
+<h2 class="text-xl font-semibold mb-6 text-blue-400">
+Add New Article
+</h2>
+
+<form class="space-y-5">
+
+<input id="title"
+placeholder="Article Title" required
+class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+<input id="category"
+placeholder="Category" required
+class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+<input id="author"
+placeholder="Author" required
+class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+<input id="location"
+placeholder="Location" required
+class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+<label class="flex items-center space-x-3 text-gray-300">
+
+<input type="checkbox" id="isToday"
+class="accent-blue-500">
+
+<span>Mark as Today's Article</span>
+
+</label>
+
+<button type="button" onclick="addArticle()"
+class="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-lg font-semibold transition">
+
+Add Article
+
+</button>
+
+</form>
+<h2 class="mt-10 text-xl text-blue-400">
+
+All Articles
+
+</h2>
 
 <div id="articleList"
-class="grid grid-cols-3 gap-6">
+class="mt-4 space-y-3">
 
 </div>
 
 </div>
 
-<script src="data/mockData.js"></script>
+</div>
+
+<script>
+// basic auth guard
+if(localStorage.getItem("role")!="admin"){
+    window.location.href="index.html";
+}
+// show email
+const currentUser = localStorage.getItem("loggedUser") || "";
+if(document.getElementById("userEmail")){
+    document.getElementById("userEmail").innerText = currentUser;
+}
+</script>
+
 <script src="js/admin.js"></script>
 
-</body>
+<script>
+function logout(){
+    localStorage.removeItem("loggedUser");
+    localStorage.removeItem("role");
+    window.location.href="index.html";
+}
+</script>
 
+</body>
 </html>

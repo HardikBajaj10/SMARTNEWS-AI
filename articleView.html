@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read Article</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white p-10">
+<div class="max-w-3xl mx-auto">
+    <h1 id="title" class="text-3xl mb-6"></h1>
+    <p id="meta" class="text-gray-400 mb-6"></p>
+    <p id="content" class="mb-8 leading-relaxed"></p>
+    <div class="space-x-4">
+
+<button onclick="like()" class="bg-green-500 px-3 py-1 rounded">
+Like
+</button>
+
+<button onclick="bookmark()" class="bg-yellow-500 px-3 py-1 rounded">
+Bookmark
+</button>
+
+<button onclick="finishReading()" class="bg-blue-500 px-3 py-1 rounded">
+Finish Reading
+</button>
+
+</div>
+</div>
+
+<script>
+if(!localStorage.getItem("loggedUser")){
+    window.location.href="index.html";
+}
+</script>
+<script src="data/articles.js"></script>
+<script src="js/article.js"></script>
+
+<script>
+function logout(){
+    localStorage.removeItem("loggedUser");
+    localStorage.removeItem("role");
+    window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>

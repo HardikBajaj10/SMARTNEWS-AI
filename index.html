@@ -1,52 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SmartNews Login</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body class="bg-gray-900 flex items-center justify-center min-h-screen">
 
-<div class="bg-gray-800 p-10 rounded-xl shadow-xl w-96">
+<div class="bg-gray-800 p-10 rounded-xl w-96 shadow-xl">
 
-<h1 class="text-3xl font-semibold tracking-wide mb-6">
-    SmartNews-AI
+<h1 class="text-3xl text-blue-400 text-center mb-6 font-bold">
+SmartNews
 </h1>
 
 <input id="email" placeholder="Email"
 class="w-full p-3 mb-4 bg-gray-700 rounded">
 
-<input id="password" type="password"
+<input id="password" type="password" required
 placeholder="Password"
 class="w-full p-3 mb-6 bg-gray-700 rounded">
 
 <button onclick="login()"
 class="w-full bg-blue-500 hover:bg-blue-600 p-3 rounded">
-
-
 Login
-
-<a href="profile.html">
-Profile
-</a>
-
-
 </button>
 
 </div>
 
 <script>
-
-function login(){
-
-window.location.href="dashboard.html";
-
+// if already logged in, send them to the appropriate dashboard
+if(localStorage.getItem("loggedUser")){
+    const role = localStorage.getItem("role");
+    if(role === "admin") window.location.href = "admin.html";
+    else window.location.href = "dashboard.html";
 }
-
 </script>
+
+<script src="js/auth.js"></script>
 
 </body>
 </html>
