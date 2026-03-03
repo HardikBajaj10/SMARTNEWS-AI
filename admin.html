@@ -1,137 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
-<script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartNews | Publisher Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="bg-gray-900 text-white flex">
+<body class="bg-gray-900 text-white min-h-screen flex">
 
-<!-- Sidebar -->
+    <!-- Sidebar -->
+    <div class="w-72 sidebar flex flex-col p-6 space-y-8 hidden md:flex">
+        <div class="mb-4">
+            <h2 class="text-2xl font-black text-blue-400 tracking-tighter">SmartNews</h2>
+            <p class="text-xs text-gray-500 uppercase font-bold tracking-widest mt-1">Publisher Studio</p>
+        </div>
 
-<div class="w-64 bg-gray-800 min-h-screen p-6 flex flex-col">
+        <nav class="flex-grow space-y-2">
+            <a href="admin.html" class="nav-link active">
+                <span class="mr-3 text-xl">✍️</span> Write Article
+            </a>
+            <a href="analytics.html" class="nav-link">
+                <span class="mr-3 text-xl">📊</span> Analytics
+            </a>
+            <a href="profile.html" class="nav-link">
+                <span class="mr-3 text-xl">👤</span> Studio Profile
+            </a>
+        </nav>
 
-<h2 class="text-2xl font-bold text-blue-400 mb-10">
-SmartNews
-</h2>
-<p class="text-gray-400 mb-6">You are logged in as <span id="userEmail"></span></p>
+        <div class="border-t border-gray-800 pt-6">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold"
+                    id="userInitial">A</div>
+                <div class="overflow-hidden">
+                    <p class="text-sm font-bold truncate" id="userNameDisplay">Admin</p>
+                    <p class="text-xs text-gray-500 truncate" id="userEmailDisplay">admin@smartnews.ai</p>
+                </div>
+            </div>
+            <button onclick="logout()"
+                class="w-full p-2 text-xs font-bold text-red-400 hover:text-red-300 transition-colors uppercase tracking-widest text-left">
+                Terminate Session
+            </button>
+        </div>
+    </div>
 
-<nav class="flex flex-col space-y-6 flex-grow text-gray-300">
+    <!-- Main Content -->
+    <main class="flex-1 p-8 lg:p-12 overflow-y-auto">
+        <div class="max-w-5xl mx-auto fade-in">
+            <header class="mb-12">
+                <h1 class="text-4xl font-bold mb-2">Editor's Desk</h1>
+                <p class="text-gray-400">Compose and broadcast your next masterpiece.</p>
+            </header>
 
-<a href="dashboard.html" class="hover:text-blue-400">
-Dashboard
-</a>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Compose Form -->
+                <div class="lg:col-span-2">
+                    <div class="glass-card p-8">
+                        <h2 class="text-xl font-bold mb-6 text-blue-300">New Publication</h2>
+                        <form id="articleForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Article Headline</label>
+                                <input id="title" type="text" placeholder="Title of your article"
+                                    class="w-full p-4 bg-gray-800 bg-opacity-40 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all font-semibold text-lg" />
+                            </div>
 
-<a href="admin.html" class="text-blue-400 font-semibold">
-Manage Articles
-</a>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Category</label>
+                                    <select id="category"
+                                        class="w-full p-4 bg-gray-800 bg-opacity-40 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all">
+                                        <option value="Technology">Technology</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Science">Science</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Politics">Politics</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Coverage Location</label>
+                                    <input id="location" type="text" placeholder="Global / Mumbai / NYC"
+                                        class="w-full p-4 bg-gray-800 bg-opacity-40 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all" />
+                                </div>
+                            </div>
 
-<a href="analytics.html" class="hover:text-blue-400">
-Analytics
-</a>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Article Content</label>
+                                <textarea id="content" rows="10" placeholder="Write your content here..."
+                                    class="w-full p-4 bg-gray-800 bg-opacity-40 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all resize-none"></textarea>
+                            </div>
 
-<a href="profile.html" class="hover:text-blue-400">
-Profile
-</a>
+                            <div class="flex items-center justify-between">
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" id="isToday"
+                                        class="w-5 h-5 accent-blue-500 rounded border-gray-700 bg-gray-800" />
+                                    <span class="text-sm text-gray-300">Feature as Breaking News</span>
+                                </label>
+                                <button type="button" onclick="addArticle()" class="btn-primary px-8">
+                                    Publish Article
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-</nav>
+                <!-- Recent Publications sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="glass-card p-6 h-full">
+                        <h2 class="text-lg font-bold mb-6 flex items-center">
+                            <span class="mr-2">📁</span> Recent Publications
+                        </h2>
+                        <div id="articleList" class="space-y-4">
+                            <!-- List of published articles -->
+                            <p class="text-gray-500 text-sm italic">No articles published yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-<button onclick="logout()"
-class="bg-red-500 hover:bg-red-600 p-3 rounded-lg mt-6">
-Logout
-</button>
+    <script>
+        // Auth Guard
+        if (localStorage.getItem("role") !== "admin") {
+            window.location.href = "index.html";
+        }
 
-</div>
+        // Display Metadata
+        const userName = localStorage.getItem("userName") || "Super Admin";
+        const userEmail = localStorage.getItem("loggedUser") || "admin@gmail.com";
+        document.getElementById("userNameDisplay").innerText = userName;
+        document.getElementById("userEmailDisplay").innerText = userEmail;
+        document.getElementById("userInitial").innerText = userName.charAt(0);
 
-
-<!-- Main Content -->
-
-<div class="flex-1 p-12">
-
-<h1 class="text-4xl font-semibold mb-8 tracking-wide">
-Manage Articles
-</h1>
-
-
-<div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700 max-w-3xl">
-
-<h2 class="text-xl font-semibold mb-6 text-blue-400">
-Add New Article
-</h2>
-
-<form class="space-y-5">
-
-<input id="title"
-placeholder="Article Title" required
-class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-<input id="category"
-placeholder="Category" required
-class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-<input id="author"
-placeholder="Author" required
-class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-<input id="location"
-placeholder="Location" required
-class="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-<label class="flex items-center space-x-3 text-gray-300">
-
-<input type="checkbox" id="isToday"
-class="accent-blue-500">
-
-<span>Mark as Today's Article</span>
-
-</label>
-
-<button type="button" onclick="addArticle()"
-class="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-lg font-semibold transition">
-
-Add Article
-
-</button>
-
-</form>
-<h2 class="mt-10 text-xl text-blue-400">
-
-All Articles
-
-</h2>
-
-<div id="articleList"
-class="mt-4 space-y-3">
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-// basic auth guard
-if(localStorage.getItem("role")!="admin"){
-    window.location.href="index.html";
-}
-// show email
-const currentUser = localStorage.getItem("loggedUser") || "";
-if(document.getElementById("userEmail")){
-    document.getElementById("userEmail").innerText = currentUser;
-}
-</script>
-
-<script src="js/admin.js"></script>
-
-<script>
-function logout(){
-    localStorage.removeItem("loggedUser");
-    localStorage.removeItem("role");
-    window.location.href="index.html";
-}
-</script>
-
+        function logout() {
+            localStorage.removeItem("loggedUser");
+            localStorage.removeItem("role");
+            localStorage.removeItem("userName");
+            window.location.href = "index.html";
+        }
+    </script>
+    <script src="js/admin.js"></script>
 </body>
+
 </html>
